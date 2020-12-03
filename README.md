@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/rsurfings/magento2-docker.svg?branch=master)](https://travis-ci.org//rsurfings/magento2-docker)
+
 # Docker image for Magento 2
 
 ## Quick start
