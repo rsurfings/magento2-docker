@@ -45,6 +45,7 @@ $ docker exec -it magento2-php-fpm php bin/magento install ...
 ~~~
 
 ## Container
+
 ```bash
 $ docker exec -it <container> bash
 ```
