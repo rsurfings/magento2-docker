@@ -33,6 +33,22 @@ DB_PASSWORD=magento2
 
 ~~~
 
+## Installation
+
+After starting the container, you'll need the install Magento 2.The installation script uses the variables in the `env` file.
+[![Magento Installation](https://devdocs.magento.com/guides/v2.4/install-gde/install-quick-ref.html)] (https://devdocs.magento.com/guides/v2.4/install-gde/install-quick-ref.html) need to be extracted/composer at the folder magento2-docker/src see FAQ session for more information.
+
+### Magento 2
+
+~~~
+$ docker exec -it magento2-php-fpm php bin/magento install ...
+~~~
+
+## Container
+```bash
+$ docker exec -it <container> bash
+```
+
 ## FAQ
 
 ### How to keep installed Magento?
