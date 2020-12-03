@@ -30,3 +30,22 @@ DB_USER=magento2
 DB_PASSWORD=magento2
 
 ~~~
+
+## FAQ
+
+### How to keep installed Magento?
+
+You can add a volume to folder `/var/www`, see the `docker-compose.yml` file.
+
+```
+volumes:
+      - ./src:/var/www
+```
+
+## Materiais úteis
+- http://br.phptherightway.com/
+- https://www.php-fig.org/psr/psr-12/
+- https://www.atlassian.com/continuous-delivery/software-testing/types-of-software-testing
+- https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+- https://devdocs.magento.com/
+- https://devdocs.magento.com/guides/v2.4/install-gde/system-requirements.html
