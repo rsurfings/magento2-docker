@@ -1,0 +1,10 @@
+language: php
+services:
+  - docker
+install:
+  - docker-compose up --build
+script:
+  - php -r "echo 1"
+branches:
+  only:
+    - master
