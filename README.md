@@ -2,7 +2,7 @@
 
 ## Quick start
 ~~~
-$ docker-compose up -d --build
+$ docker-compose up --build
 ~~~
 
 For admin username and password, please refer to the file `env`. You can also change the file `env` to update those configurations. Below are the default configurations.
