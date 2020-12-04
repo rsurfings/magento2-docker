@@ -1,0 +1,18 @@
+{
+    "git.ignoreLimitWarning": true,
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "127.0.0.1",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "signativa",
+            "database": "magento2",
+            "username": "root",
+            "password": "magento2"
+        }
+    ]
+}
