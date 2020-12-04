@@ -58,7 +58,8 @@ services:
       - bootstrap.memory_lock=true
       - discovery.type=single-node
       - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
-      - ELASTIC_PASSWORD=magento2
+      - ELASTIC_USER=${ELASTICSEARCH_USERNAME}
+      - ELASTIC_PASSWORD=${ELASTICSEARCH_PASSWORD}
       - xpack.security.enabled=true
     ulimits:
       memlock:

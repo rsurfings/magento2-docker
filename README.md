@@ -61,6 +61,21 @@ volumes:
       - ./src:/var/www
 ```
 
+## Hooks
+
+Hooks allow you to run certain actions at certain points in the startup
+procedure without having to rewrite `entrypoint.sh`. You can use hooks to
+import data, preconfigure settings or run other scripts that need to run
+each startup sequence.
+
+Hook point   | Location                 | Description
+----------   | ---------                | -----------
+Pre install  | `/hooks/pre_install.sh`  | Runs before an installation or update.
+Pre compile  | `/hooks/pre_compile.sh`  | Runs before code compilation starts.
+Post install | `/hooks/post_install.sh` | Runs after Magento has been installed.
+
+You need to `COPY` any hooks to this location yourself.
+
 ## Materiais úteis
 - http://br.phptherightway.com/
 - https://www.php-fig.org/psr/psr-12/

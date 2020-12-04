@@ -63,16 +63,18 @@ RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.default_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "memory_limit=2G" > /usr/local/etc/php/conf.d/memory-limit.ini
 
-# Create system user to run Composer and magento Commands
-RUN useradd -G www-data,root -u ${uid} -d /home/${user} ${user}
-RUN mkdir -p /home/${user}/.composer
-
-# add ssh key bitbucket
-ADD ./root/.ssh /home/${user}/.ssh
-RUN chmod 400 -R /home/${user}/.ssh
-RUN chown -R ${user}:${user} /home/${user}
+# add ssh key
+ADD ./root/.ssh /root/.ssh
+RUN chmod 400 -R /root/.ssh
 
 # Set working directory
 WORKDIR /var/www/
 
 USER ${user}
+
+# Copy hooks
+COPY ./hooks /hooks/
+
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
