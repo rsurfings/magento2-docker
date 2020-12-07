@@ -7,12 +7,17 @@ services:
         user: ${DOCKER_USER}
         uid: ${DOCKER_USER_UID}
         composer_version: ${COMPOSER_VERSION}
+        xdebug: ${XDEBUG}
+        php_memory_limit: ${PHP_MEMORY_LIMIT}
+        xdebug_remote_host: ${XDEBUG_REMOTE_HOST}
       context: ./support/docker/php
       dockerfile: Dockerfile
     restart: unless-stopped
-    working_dir: /var/www/
+    ports: 
+      - 9000:9000
     volumes:
-      - ./src:/var/www
+      - ./support/docker/php/php-fpm.d/:/usr/local/etc/php-fpm.d/
+      - ./src:/var/www/html
     depends_on:
       - magento2-database
     networks:
@@ -31,7 +36,7 @@ services:
     volumes:
       - ./support/docker/mysql:/docker-entrypoint-initdb.d
     ports:
-      - "3306:3306"
+      - 3306:3306
     networks:
       - magento2-network
 
@@ -43,8 +48,9 @@ services:
     restart: unless-stopped
     ports:
       - 80:80
+      - 443:443
     volumes:
-      - ./src:/var/www
+      - ./src:/var/www/html
       - ./support/docker/nginx/etc/nginx/conf.d:/etc/nginx/conf.d/
     depends_on:
       - magento2-php-fpm

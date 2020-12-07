@@ -6,6 +6,9 @@ LABEL maintainer="rsurfings@gmail.com"
 ARG user
 ARG uid
 ARG composer_version
+ARG xdebug=false
+ARG php_memory_limit=false
+ARG xdebug_remote_host=false
 
 # Install dependencies
 RUN apt-get update \
@@ -52,29 +55,18 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN yes | pecl install xdebug
 RUN docker-php-ext-enable xdebug
 
-# Instalação e configuração do XDebug
-RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_handler=dbgp" >>  /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_autostart=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_connect_back=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.idekey=docker" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_log=/tmp/xdebug.log" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.default_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "memory_limit=2G" > /usr/local/etc/php/conf.d/memory-limit.ini
-
 # add ssh key
 ADD ./root/.ssh /root/.ssh
 RUN chmod 400 -R /root/.ssh
 
 # Set working directory
-WORKDIR /var/www/
+WORKDIR /var/www/html
 
 USER ${user}
 
 # Copy hooks
 COPY ./hooks /hooks/
 
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+#COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
-ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
+#ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
