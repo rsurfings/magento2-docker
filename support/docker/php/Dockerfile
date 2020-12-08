@@ -59,6 +59,7 @@ RUN docker-php-ext-enable xdebug
 ADD ./root/.ssh /root/.ssh
 RUN chmod 400 -R /root/.ssh
 
+COPY ./php-fpm.d /usr/local/etc/php-fpm.d
 # Set working directory
 WORKDIR /var/www/html
 

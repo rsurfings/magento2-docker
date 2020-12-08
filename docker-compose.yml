@@ -16,7 +16,6 @@ services:
     ports: 
       - 9000:9000
     volumes:
-      - ./support/docker/php/php-fpm.d/:/usr/local/etc/php-fpm.d/
       - ./src:/var/www/html
     depends_on:
       - magento2-database
