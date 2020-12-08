@@ -38,7 +38,6 @@ services:
       - 3306:3306
     networks:
       - magento2-network
-
   magento2-webserver:
     container_name: magento2-webserver
     build:
@@ -53,6 +52,31 @@ services:
       - ./support/docker/nginx/etc/nginx/conf.d:/etc/nginx/conf.d/
     depends_on:
       - magento2-php-fpm
+    networks:
+      - magento2-network
+  magento2-redis:
+    container_name: magento2-redis
+    build:
+      context: ./support/docker/redis
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - 6370:6379
+    volumes:
+      - redis-data:/data
+    networks:
+      - magento2-network
+  magento2-varnish:
+    container_name: magento2-varnish
+    build:
+      context: ./support/docker/varnish
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+    - "80:6081"
+    - "6085:6085"
+    volumes:
+      - varnish-data:/data
     networks:
       - magento2-network
 
@@ -81,5 +105,6 @@ networks:
   magento2-network:
     driver: bridge
 volumes:
+  redis-data:
+  varnish-data:
   elasticsearch-data:
-    driver: local
